@@ -108,7 +108,7 @@ function callAPI() {
     type: "GET",
     url: queryURL,
     rating: "pg",
-    limit: 20
+    limit: 10
   })
   .done(function(response){
     for (var i = 0; i < response.data.length; i++) {
@@ -142,7 +142,10 @@ $(document).on("click", ".foodbtn", callAPI);
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
   if (image.attr("src") === image.attr("data-moving")) {
+    image.removeAttr("src");
     image.attr("src", image.attr("data-still"));
-  } else
+  } else {
+    image.removeAttr("src");
     image.attr("src", image.attr("data-moving"));
+  }
 });
