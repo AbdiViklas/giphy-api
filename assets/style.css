@@ -2,3 +2,12 @@
   margin: 0.5vw;
   padding: 0 1.5rem;
 }
+
+.giphy {
+  display: inline-block;
+  margin: .5rem .25rem 1rem .25rem;
+}
+
+.preloader-wrapper {
+  margin: auto;
+}
