@@ -138,7 +138,7 @@ $(document).on("click", ".foodbtn", callAPI);
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
   console.log("image data, before: " + JSON.stringify(image.data()));
-  if (image.data("movingStatus") === true) {
+  if (image.attr("src") === image.data("moving")) {
     image.attr("src", image.data("still"));
     console.log("still url set:");
     console.log(image.attr("src"));
@@ -147,8 +147,8 @@ $(document).on("click", ".giphy", function () {
     console.log("moving url set:");
     console.log(image.attr("src"));
   }
-  image.data("movingStatus", !(image.data("movingStatus")));
-  console.log("movingStatus now " + image.data("movingStatus"));
+  // image.data("movingStatus", !(image.data("movingStatus")));
+  // console.log("movingStatus now " + image.data("movingStatus"));
   console.log("image data, after: " + JSON.stringify(image.data()));
 });
 /*
