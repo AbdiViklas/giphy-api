@@ -87,7 +87,11 @@ function addGIF(object) {
   imgDiv.height(object.images.fixed_height.height);
   var img = $("<img>").attr("src", object.images.fixed_height.url);
   img.attr("id", object.id);
-  img.data({"still": object.images.fixed_height_still.url, "moving": object.images.fixed_height.url, "movingStatus": true});
+  img.attr({
+    "data-still": object.images.fixed_height_still.url,
+    "data-moving": object.images.fixed_height.url,
+    "data-movingStatus": true
+  });
   var rating = $("<p>").text("Rating: " + object.rating);
   newDiv.append(imgDiv, rating);
   img.on("load", function(){
@@ -137,27 +141,8 @@ $(document).on("click", ".foodbtn", callAPI);
 
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
-  console.log("image data, before: " + JSON.stringify(image.data()));
-  if (image.data("movingStatus") === true) {
-    image.attr("src", image.data("still"));
-    console.log("still url set:");
-    console.log(image.attr("src"));
-  } else {
-    image.attr("src", image.data("moving"));
-    console.log("moving url set:");
-    console.log(image.attr("src"));
-  }
-  image.data("movingStatus", !(image.data("movingStatus")));
-  console.log("movingStatus now " + image.data("movingStatus"));
-  console.log("image data, after: " + JSON.stringify(image.data()));
+  if (image.attr("src") === image.attr("data-moving")) {
+    image.attr("src", image.attr("data-still"));
+  } else
+    image.attr("src", image.attr("data-moving"));
 });
-/*
-Observed behavior:
-1. on first click, src is reported as still URL, but image keeps moving
-2. on subsequent clicks, src is reported as moving URL no matter what, though li 152 toggles true and false and lines 144 and 148 log the correct responses
-3. on inspection, entire data object is getting replaced with only {movingstatus: true}
-4. Experimentation confirms: setting .attr("src") clears .data
-*/
-
-// When search is "gnocchi" or "taco", sometimes clicking stops animation (though never restarts it).
-// When search is "zucchini", or others, it reports the src changing correctly even though the image on the page keeps moving
