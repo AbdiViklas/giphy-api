@@ -137,19 +137,19 @@ $(document).on("click", ".foodbtn", callAPI);
 
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
-  // console.log("local var data, before: " + JSON.stringify(image.data()));
+  console.log("image data, before: " + JSON.stringify(image.data()));
   if (image.data("movingStatus") === true) {
     image.attr("src", image.data("still"));
-    // console.log("still url set:");
-    // console.log(image.attr("src"));
+    console.log("still url set:");
+    console.log(image.attr("src"));
   } else {
     image.attr("src", image.data("moving"));
-    // console.log("moving url set:");
-    // console.log(image.attr("src"));
+    console.log("moving url set:");
+    console.log(image.attr("src"));
   }
   image.data("movingStatus", !(image.data("movingStatus")));
-  // console.log("movingStatus now " + image.data("movingStatus"));
-  // console.log("local var data, after: " + JSON.stringify(image.data()));
+  console.log("movingStatus now " + image.data("movingStatus"));
+  console.log("image data, after: " + JSON.stringify(image.data()));
 });
 /*
 Observed behavior:
@@ -158,3 +158,6 @@ Observed behavior:
 3. on inspection, entire data object is getting replaced with only {movingstatus: true}
 4. Experimentation confirms: setting .attr("src") clears .data
 */
+
+// When search is "gnocchi" or "taco", sometimes clicking stops animation (though never restarts it).
+// When search is "zucchini", or others, it reports the src changing correctly even though the image on the page keeps moving
