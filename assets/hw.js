@@ -1,17 +1,3 @@
-/*
-Pseudocode:
-1. x establish a target div for the buttons and one for the images
-2. x establish the form
-3. x hard-code the starting array
-4. x write the function to add an individual button from the array to the display
-5. x call this function for every element in the array
-6. x write the function to take the form input, add it to the array, and add it to the page
-7. x write the function to make the Giphy call for every .foodbtn click and populate #results-container
-8. write the function to start/stop on click?
-*/
-
-// key: f3302186cf634c96bb35b6e25a3207ac
-
 var stringArray = ["Carrots", "Fondue", "Fried chicken", "Full English", "Gnocchi", "Green beans", "Hot fudge sundae", "Hummus", "Lobster", "Orange juice", "Peas", "Pineapple pizza", "Quarter pounder", "Ribeye", "Taco", "Zucchini"];
 
 var spinner = `
@@ -103,12 +89,11 @@ function addGIF(object) {
 function callAPI() {
   $("#results-container").empty();
   var searchFood = $(this).data("food");
-  var queryURL = "http://api.giphy.com/v1/gifs/search?limit=20&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
+  var queryURL = "http://api.giphy.com/v1/gifs/search?limit=10&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
   $.ajax({
     type: "GET",
     url: queryURL,
-    rating: "pg",
-    limit: 10
+    rating: "pg"
   })
   .done(function(response){
     for (var i = 0; i < response.data.length; i++) {
@@ -144,8 +129,10 @@ $(document).on("click", ".giphy", function () {
   if (image.attr("src") === image.attr("data-moving")) {
     image.removeAttr("src");
     image.attr("src", image.attr("data-still"));
+    console.log(image.attr("src"));
   } else {
     image.removeAttr("src");
     image.attr("src", image.attr("data-moving"));
+    console.log(image.attr("src"));
   }
 });
