@@ -65,17 +65,11 @@ $("#add-submit").on("click", function (event) {
 });
 
 function addGIF(object) {
-  // create the whole big overall card div
-  var newDiv = $("<div>").addClass("giphy card hoverable");
-  // set its proportions to those of the incoming image, to avoid layout change on image load
-  newDiv.width(object.images.fixed_height.width);
-  newDiv.height(object.images.fixed_height.height);
-  // create the div .card-image inside the .card
-  var cardImage = $("<div class='card-image'>");
-  // create the spinner to take the place of the future img
+  var newDiv = $("<div>").addClass("giphy card-panel hoverable");
   var imgDiv = $("<div>").html(spinner);
   imgDiv.addClass("center-align valign-wrapper");
-  // create the image
+  imgDiv.width(object.images.fixed_height.width);
+  imgDiv.height(object.images.fixed_height.height);
   var img = $("<img>").attr("src", object.images.fixed_height.url);
   img.attr("id", object.id);
   img.attr({
@@ -83,12 +77,8 @@ function addGIF(object) {
     "data-moving": object.images.fixed_height.url,
     "data-movingStatus": true
   });
-  // create the rating
-  var rating = $("<span class='card-title'>").text("Rating: " + object.rating);
-  // append the spinner and the rating into the inner card-image div
-  cardImage.append(imgDiv, rating);
-  newDiv.append(cardImage);
-  // when img loads, swap the spinner for the image
+  var rating = $("<p>").text("Rating: " + object.rating);
+  newDiv.append(imgDiv, rating);
   img.on("load", function(){
     imgDiv.html(img);
   });
