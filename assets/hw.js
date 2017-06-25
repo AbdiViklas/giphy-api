@@ -126,9 +126,11 @@ $(document).on("click", ".foodbtn", callAPI);
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
   if (image.attr("src") === image.attr("data-moving")) {
+    image.removeAttr("src");
     image.attr("src", image.attr("data-still"));
     console.log(image.attr("src"));
   } else {
+    image.removeAttr("src");
     image.attr("src", image.attr("data-moving"));
     console.log(image.attr("src"));
   }
