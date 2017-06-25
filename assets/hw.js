@@ -88,11 +88,7 @@ function addGIF(object) {
 function callAPI() {
   $("#results-container").empty();
   var searchFood = $(this).data("food");
-<<<<<<< HEAD
-  var queryURL = "http://api.giphy.com/v1/gifs/search?limit=10&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
-=======
   var queryURL = "https://api.giphy.com/v1/gifs/search?limit=20&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
->>>>>>> card-image
   $.ajax({
     type: "GET",
     url: queryURL,
@@ -130,11 +126,9 @@ $(document).on("click", ".foodbtn", callAPI);
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
   if (image.attr("src") === image.attr("data-moving")) {
-    image.removeAttr("src");
     image.attr("src", image.attr("data-still"));
     console.log(image.attr("src"));
   } else {
-    image.removeAttr("src");
     image.attr("src", image.attr("data-moving"));
     console.log(image.attr("src"));
   }
