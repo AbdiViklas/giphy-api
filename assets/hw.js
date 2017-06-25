@@ -88,7 +88,7 @@ function addGIF(object) {
 function callAPI() {
   $("#results-container").empty();
   var searchFood = $(this).data("food");
-  var queryURL = "https://api.giphy.com/v1/gifs/search?limit=20&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
+  var queryURL = "https://api.giphy.com/v1/gifs/search?limit=10&rating=pg&api_key=f3302186cf634c96bb35b6e25a3207ac&q=" + searchFood;
   $.ajax({
     type: "GET",
     url: queryURL,
@@ -125,13 +125,20 @@ $(document).on("click", ".foodbtn", callAPI);
 
 $(document).on("click", ".giphy", function () {
   var image = $(this).find("img");
+  var parent = image.parent();
   if (image.attr("src") === image.attr("data-moving")) {
-    image.removeAttr("src");
+    parent.html(spinner);
     image.attr("src", image.attr("data-still"));
+    image.on("load", function() {
+      parent.html(image);
+    })
     console.log(image.attr("src"));
   } else {
-    image.removeAttr("src");
+    parent.html(spinner);
     image.attr("src", image.attr("data-moving"));
+    image.on("load", function() {
+      parent.html(image);
+    })
     console.log(image.attr("src"));
   }
 });
